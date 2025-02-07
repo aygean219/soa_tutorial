@@ -1,0 +1,19 @@
+services:
+  auth-service:
+    container_name: authentication
+    build:
+      dockerfile: auth-service/Dockerfile
+      context: .
+    restart: always
+    ports:
+      - "80:80"
+  test-api:
+    container_name: test-service
+    build:
+      dockerfile: test-service/Dockerfile
+      context: .
+    restart: always
+    ports:
+      - "81:81"
+    depends_on:
+      - auth-service
